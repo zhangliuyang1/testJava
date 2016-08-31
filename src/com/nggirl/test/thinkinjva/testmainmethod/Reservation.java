@@ -1,5 +1,6 @@
 package com.nggirl.test.thinkinjva.testmainmethod;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -14,6 +15,7 @@ public class Reservation {
     private Date date;
     private double price;
     private float time;
+    private BigDecimal cost;
 
     @Override
     public boolean equals(Object o){
@@ -28,7 +30,7 @@ public class Reservation {
         if(Double.compare(reservation.price,price) != 0)return false;
         if(Float.compare(reservation.time,time)!=0) return false;
         if (address != null ? !address.equals(reservation.address) : reservation.address != null)return false;
-
+        if (cost != null ? !cost.equals(reservation.cost) : reservation.address != null) return false;
         return !(date != null ? !date.equals(reservation.date) : reservation.date != null);
 
     }
@@ -44,6 +46,7 @@ public class Reservation {
         temp = Double.doubleToLongBits(price);
         result = 31*result + (int)(temp ^ (temp >>> 32));
         result = 31*result + (time != +0.0f ? Float.floatToIntBits(time) : 0);
+        result = 31*result + (cost != null ? cost.hashCode() : 0);
         return result;
     }
     /*  @Override
